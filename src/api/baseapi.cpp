@@ -1316,9 +1316,6 @@ bool TessBaseAPI::ProcessPage(Pix *pix, int page_index, const char *filename,
                               TessResultRenderer *renderer) {
   SetInputName(filename);
   SetImage(pix);
-
-  // WriteLSTMFLinepair("test", "/home/jkamlah/Documents/test/", pix, "test");
-
   bool failed = false;
 
   if (tesseract_->tessedit_pageseg_mode == PSM_AUTO_ONLY) {
