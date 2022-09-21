@@ -803,10 +803,15 @@ bool TessBaseAPI::WriteLSTMFLineData(const char *name, const char *path, Pix *pi
       return false;
   }
   // Check if truth_text exists
-  if ((truth_text != NULL) && (truth_text[0] == '\0')) {
-   tprintf("Ground truth text is empty\n");
+  if ((truth_text != NULL) && (truth_text[0] == '\0') || (truth_text[0] == '\n')) {
+   tprintf("Ground truth text is empty or starts with newline.\n");
    return false;
   }
+  // Check if pix exists
+  if (!pix){
+    tprintf("No image provided.\n");
+   return false;
+  };
   // Variables for ImageData for just one line
   std::vector<TBOX> boxes;
   std::vector<std::string> line_texts;
@@ -828,7 +833,6 @@ bool TessBaseAPI::WriteLSTMFLineData(const char *name, const char *path, Pix *pi
     }
     text_index++;
   }
-  
   std::vector<int> page_numbers(boxes.size(), 1);
 
   // Init ImageData
