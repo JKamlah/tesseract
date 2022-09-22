@@ -791,31 +791,32 @@ Boxa *TessBaseAPI::GetComponentImages(PageIteratorLevel level, bool text_only, b
 
 /**
  * Stores lstmf based on in-memory data for one line with pix and text
+ * This function is (atm) not used in the current processing, 
+ * but can be used via CAPI e.g. tesserocr 
  */
 bool TessBaseAPI::WriteLSTMFLineData(const char *name, const char *path, Pix *pix, 
                                      const char *truth_text, bool vertical) {
   
   // Check if path exists
   std::ifstream test(path); 
-  if (!test)
-  {
-      tprintf("The path %s doesn't exist.\n", path);
-      return false;
+  if (!test) {
+    tprintf("The path %s doesn't exist.\n", path);
+    return false;
   }
   // Check if truth_text exists
   if ((truth_text != NULL) && (truth_text[0] == '\0') || (truth_text[0] == '\n')) {
-   tprintf("Ground truth text is empty or starts with newline.\n");
-   return false;
+    tprintf("Ground truth text is empty or starts with newline.\n");
+    return false;
   }
   // Check if pix exists
-  if (!pix){
+  if (!pix) {
     tprintf("No image provided.\n");
-   return false;
-  };
+    return false;
+  }
   // Variables for ImageData for just one line
   std::vector<TBOX> boxes;
   std::vector<std::string> line_texts;
-  std::string current_char, last_char;
+  std::string current_char, last_char, textline_str;
   unsigned text_index = 0;
   std::string truth_text_str = std::string(truth_text);
   TBOX bounding_box = TBOX(0, 0, pixGetWidth(pix), pixGetHeight(pix));
@@ -827,12 +828,19 @@ bool TessBaseAPI::WriteLSTMFLineData(const char *name, const char *path, Pix *pi
       current_char = " ";
     }
     if (last_char != " " || current_char != " ") {
-      boxes.push_back(bounding_box);
-      line_texts.push_back(current_char);
+      textline_str.append(current_char);
       last_char = current_char;
     }
     text_index++;
   }
+  if (textline_str.empty() || textline_str != " ") {
+    tprintf("There is no first line information.\n");
+    return false;
+  } else {
+    boxes.push_back(bounding_box);
+    line_texts.push_back(textline_str);
+  }
+
   std::vector<int> page_numbers(boxes.size(), 1);
 
   // Init ImageData
