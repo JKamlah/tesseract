@@ -65,17 +65,17 @@
 #include <tesseract/renderer.h>       // for TessResultRenderer
 #include <tesseract/resultiterator.h> // for ResultIterator
 
-#include <cmath>    // for round, M_PI
-#include <cstdint>  // for int32_t
-#include <cstring>  // for strcmp, strcpy
-#include <fstream>  // for size_t
+#include <cmath>      // for round, M_PI
+#include <cstdint>    // for int32_t
+#include <cstring>    // for strcmp, strcpy
 #include <filesystem> // for path
-#include <iostream> // for std::cin
-#include <locale>   // for std::locale::classic
-#include <memory>   // for std::unique_ptr
-#include <set>      // for std::pair
-#include <sstream>  // for std::stringstream
-#include <vector>   // for std::vector
+#include <fstream>    // for size_t
+#include <iostream>   // for std::cin
+#include <locale>     // for std::locale::classic
+#include <memory>     // for std::unique_ptr
+#include <set>        // for std::pair
+#include <sstream>    // for std::stringstream
+#include <vector>     // for std::vector
 
 #include <allheaders.h> // for pixDestroy, boxCreate, boxaAddBox, box...
 #ifdef HAVE_LIBCURL
@@ -791,20 +791,21 @@ Boxa *TessBaseAPI::GetComponentImages(PageIteratorLevel level, bool text_only, b
 
 /**
  * Stores lstmf based on in-memory data for one line with pix and text
- * This function is (atm) not used in the current processing, 
- * but can be used via CAPI e.g. tesserocr 
+ * This function is (atm) not used in the current processing,
+ * but can be used via CAPI e.g. tesserocr
  */
-bool TessBaseAPI::WriteLSTMFLineData(const char *name, const char *path, Pix *pix, 
-                                     const char *truth_text, bool vertical) {
-  
+bool TessBaseAPI::WriteLSTMFLineData(const char *name, const char *path,
+                                     Pix *pix, const char *truth_text,
+                                     bool vertical) {
   // Check if path exists
-  std::ifstream test(path); 
+  std::ifstream test(path);
   if (!test) {
     tprintf("The path %s doesn't exist.\n", path);
     return false;
   }
   // Check if truth_text exists
-  if ((truth_text != NULL) && (truth_text[0] == '\0') || (truth_text[0] == '\n')) {
+  if ((truth_text != NULL) && (truth_text[0] == '\0') ||
+      (truth_text[0] == '\n')) {
     tprintf("Ground truth text is empty or starts with newline.\n");
     return false;
   }
@@ -822,7 +823,8 @@ bool TessBaseAPI::WriteLSTMFLineData(const char *name, const char *path, Pix *pi
   TBOX bounding_box = TBOX(0, 0, pixGetWidth(pix), pixGetHeight(pix));
   // Take only the first line from the truth_text, replace tabs with whitespaces
   // and reduce multiple whitespaces to just one
-  while (text_index < truth_text_str.size() && truth_text_str[text_index] != '\n') {
+  while (text_index < truth_text_str.size() &&
+         truth_text_str[text_index] != '\n') {
     current_char = truth_text_str[text_index];
     if (current_char == "\t") {
       current_char = " ";
@@ -847,10 +849,10 @@ bool TessBaseAPI::WriteLSTMFLineData(const char *name, const char *path, Pix *pi
   auto *image_data = new ImageData(vertical, pix);
   image_data->set_page_number(1);
   image_data->AddBoxes(boxes, line_texts, page_numbers);
-  
+
   // Write it to a lstmf-file
-  std::filesystem::path filename = path; 
-  filename /= std::string(name)+std::string(".lstmf");
+  std::filesystem::path filename = path;
+  filename /= std::string(name) + std::string(".lstmf");
   DocumentData doc_data(filename);
   doc_data.AddPageToDocument(image_data);
   if (!doc_data.SaveDocument(filename.c_str(), nullptr)) {
