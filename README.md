@@ -1,38 +1,35 @@
 # Tesseract OCR
 
 [![Build status](https://ci.appveyor.com/api/projects/status/miah0ikfsf0j3819/branch/master?svg=true)](https://ci.appveyor.com/project/zdenop/tesseract/)
-[![Build status](https://github.com/tesseract-ocr/tesseract/workflows/sw/badge.svg)](https://github.com/tesseract-ocr/tesseract/actions/workflows/sw.yml)<br>
+[![Build status](https://github.com/tesseract-ocr/tesseract/workflows/sw/badge.svg)](https://github.com/tesseract-ocr/tesseract/actions/workflows/sw.yml)\
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/tesseract-ocr/badge.svg)](https://scan.coverity.com/projects/tesseract-ocr)
-[![Code Quality: Cpp](https://img.shields.io/lgtm/grade/cpp/g/tesseract-ocr/tesseract.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/tesseract-ocr/tesseract/context:cpp)
-[![Total Alerts](https://img.shields.io/lgtm/alerts/g/tesseract-ocr/tesseract.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/tesseract-ocr/tesseract/alerts)
+[![CodeQL](https://github.com/tesseract-ocr/tesseract/workflows/CodeQL/badge.svg)](https://github.com/tesseract-ocr/tesseract/security/code-scanning)
 [![OSS-Fuzz](https://img.shields.io/badge/oss--fuzz-fuzzing-brightgreen)](https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&can=2&q=proj:tesseract-ocr)
-<br/>
+\
 [![GitHub license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://raw.githubusercontent.com/tesseract-ocr/tesseract/main/LICENSE)
 [![Downloads](https://img.shields.io/badge/download-all%20releases-brightgreen.svg)](https://github.com/tesseract-ocr/tesseract/releases/)
 
-Table of Contents
-=================
+## Table of Contents
 
 * [Tesseract OCR](#tesseract-ocr)
-   * [About](#about)
-   * [Brief history](#brief-history)
-   * [Installing Tesseract](#installing-tesseract)
-   * [Running Tesseract](#running-tesseract)
-   * [For developers](#for-developers)
-   * [Support](#support)
-   * [License](#license)
-   * [Dependencies](#dependencies)
-   * [Latest Version of README](#latest-version-of-readme)
-
+  * [About](#about)
+  * [Brief history](#brief-history)
+  * [Installing Tesseract](#installing-tesseract)
+  * [Running Tesseract](#running-tesseract)
+  * [For developers](#for-developers)
+  * [Support](#support)
+  * [License](#license)
+  * [Dependencies](#dependencies)
+  * [Latest Version of README](#latest-version-of-readme)
 
 ## About
 
 This package contains an **OCR engine** - `libtesseract` and a **command line program** - `tesseract`.
 
-Tesseract 4 adds a new neural net (LSTM) based OCR engine which is focused on line recognition, but also still supports the legacy Tesseract OCR engine of Tesseract 3 which works by recognizing character patterns. Compatibility with Tesseract 3 is enabled by using the Legacy OCR Engine mode (--oem 0).
+Tesseract 4 adds a new neural net (LSTM) based [OCR engine](https://en.wikipedia.org/wiki/Optical_character_recognition) which is focused on line recognition, but also still supports the legacy Tesseract OCR engine of Tesseract 3 which works by recognizing character patterns. Compatibility with Tesseract 3 is enabled by using the Legacy OCR Engine mode (--oem 0).
 It also needs [traineddata](https://tesseract-ocr.github.io/tessdoc/Data-Files.html) files which support the legacy engine, for example those from the [tessdata](https://github.com/tesseract-ocr/tessdata) repository.
 
-The lead developer is Ray Smith. The maintainer is Zdenko Podobny. For a list of contributors see [AUTHORS](https://github.com/tesseract-ocr/tesseract/blob/main/AUTHORS)
+Stefan Weil is the current lead developer. Ray Smith was the lead developer until 2018. The maintainer is Zdenko Podobny. For a list of contributors see [AUTHORS](https://github.com/tesseract-ocr/tesseract/blob/main/AUTHORS)
 and GitHub's log of [contributors](https://github.com/tesseract-ocr/tesseract/graphs/contributors).
 
 Tesseract has **unicode (UTF-8) support**, and can **recognize more than 100 languages** "out of the box".
@@ -65,7 +62,7 @@ and **[Change Log](https://github.com/tesseract-ocr/tesseract/blob/main/ChangeLo
 
 ## Installing Tesseract
 
-You can either [Install Tesseract via pre-built binary package](https://tesseract-ocr.github.io/tessdoc/Home.html)
+You can either [Install Tesseract via pre-built binary package](https://tesseract-ocr.github.io/tessdoc/Installation.html)
 or [build it from source](https://tesseract-ocr.github.io/tessdoc/Compiling.html).
 
 A C++ compiler with good C++17 support is required for building Tesseract from source.
@@ -97,6 +94,7 @@ particularly the [FAQ](https://tesseract-ocr.github.io/tessdoc/FAQ.html) to see 
 If not, search the [Tesseract user forum](https://groups.google.com/g/tesseract-ocr), the [Tesseract developer forum](https://groups.google.com/g/tesseract-dev) and [past issues](https://github.com/tesseract-ocr/tesseract/issues), and if you still can't find what you need, ask for support in the mailing-lists.
 
 Mailing-lists:
+
 * [tesseract-ocr](https://groups.google.com/g/tesseract-ocr) - For tesseract users.
 * [tesseract-dev](https://groups.google.com/g/tesseract-dev) - For tesseract developers.
 
@@ -133,4 +131,4 @@ It is suggested to use leptonica with built-in support for [zlib](https://zlib.n
 
 For the latest online version of the README.md see:
 
-https://github.com/tesseract-ocr/tesseract/blob/main/README.md
+<https://github.com/tesseract-ocr/tesseract/blob/main/README.md>
